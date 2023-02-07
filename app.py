@@ -143,7 +143,7 @@ class DirectorView(Resource):
         return "Director created", 201
 
 
-@director_ns.route("/<uid:int>")
+@director_ns.route("/<int:uid>")
 class DirectorsView(Resource):
     def get(self, uid: int):
         try:
@@ -169,6 +169,7 @@ class DirectorsView(Resource):
         db.session.commit()
         return "Director deleted", 204
 
+
 # ============================ Genre ===========================================
 @genre_ns.route("/")
 class GenresView(Resource):
@@ -184,8 +185,8 @@ class GenresView(Resource):
         return "Genre created", 201
 
 
-@genre_ns.route("/<uid:int>")
-class GenresView(Resource):
+@genre_ns.route("/<int:uid>")
+class GenreView(Resource):
     def get(self, uid: int):
         try:
             genre = db.session.query(Genre).get(uid)
@@ -209,7 +210,6 @@ class GenresView(Resource):
         db.session.delete(genre)
         db.session.commit()
         return "Genre deleted", 204
-
 
 
 if __name__ == '__main__':
